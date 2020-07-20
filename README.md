@@ -31,7 +31,14 @@ Powertop binary script and startup service for extending battery life on laptops
 
 ### Install
 * `cd linux-powersaving`
+* `chmod +x install.sh`
 * `sudo ./install.sh`
+
+### Verify
+* Restart your machine.
+* Open terminal and type `sudo powertop`.
+* Navigate to **Tunables** tab.
+* It should list **Bad** for devices which you have blacklisted and **Good** for rest of the devices.
 
 ### Uninstall
 Automatically
