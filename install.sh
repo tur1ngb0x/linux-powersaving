@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo "\n\n\nPowertop script and service installer\n\n"
+read -p " > Type 'yes' to proceed: "
+if [ "$REPLY" != "yes" ]; then
+   exit
+fi
+
 echo Installing powertop script...
 sudo cp ./pwrtp.sh /usr/bin/
 sudo chmod +x /usr/bin/pwrtp.sh

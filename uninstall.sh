@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo "\n\n\nPowertop script and service un-installer\n\n"
+read -p " > Type 'yes' to proceed: "
+if [ "$REPLY" != "yes" ]; then
+   exit
+fi
+
 echo Stopping powertop service...
 sudo systemctl stop pwrtp.service
 
