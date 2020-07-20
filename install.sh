@@ -1,11 +1,11 @@
 #!/bin/bash
 
 echo Installing powertop script...
-cp ./pwrtp.sh /usr/bin/
-chmod +x /usr/bin/pwrtp.sh
+sudo cp ./pwrtp.sh /usr/bin/
+sudo chmod +x /usr/bin/pwrtp.sh
 
 echo Adding powertop service...
-cp ./pwrtp.service /etc/systemd/system/
+sudo cp ./pwrtp.service /etc/systemd/system/
 
 echo Reloading systemd...
 sudo systemctl daemon-reload
