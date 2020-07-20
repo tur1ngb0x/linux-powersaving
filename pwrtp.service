@@ -7,7 +7,7 @@ Description=Powertop custom startup script
 [Service]
 Type=idle
 Environment="TERM=dumb"
-ExecStart=/usr/bin/pwrtp
+ExecStart=/usr/bin/pwrtp.sh
 
 [Install]
 WantedBy=multi-user.target
