@@ -43,7 +43,8 @@ Powertop binary script and startup service for extending battery life on laptops
 ### Uninstall
 Automatically
 * `cd linux-powersaving`
-* `sudo ./un-install.sh`
+* `chmod +x uninstall.sh`
+* `sudo ./uninstall.sh`
 
 Manually
 * `sudo systemctl stop pwrtp.service`
