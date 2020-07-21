@@ -3,13 +3,18 @@
 # Powertop script
 # /usr/bin/pwrtp.sh
 
-# Force power-saving for all devices
+# Force power-saving for all devices, will work for most laptops
 sudo powertop --auto-tune
 
-# Note: Below devices and paths will differ by laptops, configure accordingly
+# Note: Below devices and paths will differ by laptops
+# Configure your devices whether to blacklist
 
+# Power settings
 # auto = enable power saving
-# on = disable power saving
+# on = disable power saving (Blacklist)
+
+# Your <device>
+# sudo bash -c 'echo "power_setting" > <path>'
 
 # PCI Device NVIDIA Corporation GP108M [GeForce MX150]
 sudo bash -c 'echo "auto" > /sys/bus/pci/devices/0000:01:00.0/power/control'
