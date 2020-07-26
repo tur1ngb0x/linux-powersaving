@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # Powertop script
 # /usr/bin/pwrtp.sh
