@@ -3,35 +3,52 @@
 # Powertop script
 # /usr/bin/pwrtp.sh
 
-# Force power-saving for all devices, will work for most laptops
-sudo powertop --auto-tune
+auto-tune ()
+{
+	# Apply power savings to all devices
+	sudo powertop --auto-tune
+}
 
-# Note: Below devices and paths will differ by laptops
-# Configure your devices whether to blacklist
+enable-powersavings ()
+{
+	# Apply power savings to these devices
+	# Device Name
+	# sudo bash -c 'echo "auto" > path'
+	# Skip this section if you are using auto-tune
+}
 
-# Power settings
-# auto = enable power saving
-# on = disable power saving (Blacklist)
+disable-powersavings ()
+{
+	# Do not apply power savings to these devices
+	# Device Name
+	# sudo bash -c 'echo "on" > path'
 
-# Your <device>
-# sudo bash -c 'echo "power_setting" > <path>'
+	# USB 2.0 Mouse
+	sudo bash -c 'echo "on" > /sys/bus/usb/devices/1-3/power/control'
+	sudo bash -c 'echo "on" > /sys/bus/usb/devices/1-4/power/control'
+	# Wi-Fi Adapter
+	sudo bash -c 'echo "on" > /sys/bus/pci/devices/0000:03:00.0/power/control'
+}
 
-# PCI Device NVIDIA Corporation GP108M [GeForce MX150]
-sudo bash -c 'echo "auto" > /sys/bus/pci/devices/0000:01:00.0/power/control'
+wakeup-lan ()
+{
+	# Ethernet
+	sudo bash -c 'echo "disabled" > /sys/class/net/enp2s0f1/device/power/wakeup'
+	# Wi-Fi Adapter
+	sudo bash -c 'echo "disabled" > /sys/class/net/wlp3s0/device/power/wakeup'
+}
 
-# USB device Gaming Mouse G402 [Logitech]
-sudo bash -c 'echo "on" > /sys/bus/usb/devices/1-3/power/control'
-sudo bash -c 'echo "on" > /sys/bus/usb/devices/1-4/power/control'
+wakeup-usb ()
+{
+	sudo bash -c 'echo "disabled" > /sys/bus/usb/devices/usb1/power/wakeup'
+	sudo bash -c 'echo "disabled" > /sys/bus/usb/devices/usb2/power/wakeup'
+	sudo bash -c 'echo "disabled" > /sys/bus/usb/devices/1-5/power/wakeup'
+	sudo bash -c 'echo "disabled" > /sys/bus/usb/devices/1-3/power/wakeup'
+}
 
-# PCI Device Qualcomm Atheros QCA9377 802.11ac Wireless Network Adapter
-sudo bash -c 'echo "on" > /sys/bus/pci/devices/0000:03:00.0/power/control'
-
-# Disable Wake on LAN
-echo 'disabled' > '/sys/class/net/enp2s0f1/device/power/wakeup';
-echo 'disabled' > '/sys/class/net/wlp3s0/device/power/wakeup';
-
-# Disable S3 State USB Wakeup
-echo 'disabled' > '/sys/bus/usb/devices/usb1/power/wakeup';
-echo 'disabled' > '/sys/bus/usb/devices/usb2/power/wakeup';
-echo 'disabled' > '/sys/bus/usb/devices/1-5/power/wakeup';
-echo 'disabled' > '/sys/bus/usb/devices/1-3/power/wakeup';
+# Begin script from here
+auto-tune
+enable-powersavings
+disable-powersavings
+wakeup-lan
+wakeup-usb
