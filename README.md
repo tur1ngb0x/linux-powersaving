@@ -4,6 +4,7 @@
 Powertop binary script and startup service for extending battery life on laptops running Linux.
 
 ### Requirements
+Make sure you have updated the system fully.
 * Debian: `sudo apt install git powertop`
 * Fedora: `sudo dnf install git powertop`
 * Arch: `sudo pacman -S git powertop`
@@ -13,12 +14,15 @@ Powertop binary script and startup service for extending battery life on laptops
 * Navigate to **Tunables** tab.
     * **Good** = Power saving is enabled.
     * **Bad** = Power saving is disabled.
-* Decide which items do you want to blacklist (disable power saving).
-* Blacklist devices such as:
+* We will need path of the device in order to blacklist it.
+* Make a list of devices for which you want to disable power savings, such as:
+	* External HDD/SSD
     * Wireless/Wired Mouse
-    * Keyboard
-    * Wi-Fi adapter
-* Copy the command(s) printed on the top when you toggle "Bad" state for respective device.
+    * Wireless/Wired Keyboard
+    * Wi-Fi Adapter
+    * Ethernet
+* Toggle "Bad" state for respective device(s) and copy the command(s) printed on the top.
+
 
 ### Download
 * `git clone https://github.com/tur1ngb0x/linux-powersaving.git`
@@ -26,7 +30,7 @@ Powertop binary script and startup service for extending battery life on laptops
 ### Configure (Optional)
 * `cd linux-powersaving`
 * Open **pwrtp.sh** with any text editor.
-* Add your blacklisted devices if needed.
+* In the "enable-powersavings" section of the script, add your device path as mentioned in the example template.
 * Save the file.
 
 ### Install
@@ -38,7 +42,9 @@ Powertop binary script and startup service for extending battery life on laptops
 * Restart your machine.
 * Open terminal and type `sudo powertop`.
 * Navigate to **Tunables** tab.
-* It should list **Bad** for devices which you have blacklisted and **Good** for rest of the devices.
+* It should show
+    * **Bad** for devices for which you have disabled power savings.
+    * **Good** for rest of the devices.
 
 ### Uninstall
 Automatically
@@ -54,7 +60,7 @@ Manually
 * `sudo systemctl daemon-reload`
 
 ### Notes
-Optimus Laptop (Intel GPU + Nvidia GPU)
+Optimus Laptop Users (Intel iGPU + Nvidia dGPU)
 * Open source Nvidia drivers (nouveau) do not support power management resulting in increased battery usage and higher idle temperatures.
-* Install Nvidia proprietary drivers (nvidia), these support power management.
-* Switch to Intel GPU when not doing any GPU intensive tasks such as gaming, deep learning, rendering etc.
+* Install latest (stable and tested) Nvidia proprietary drivers (nvidia) from your distro repos, these drivers support power management.
+* Switch to Intel iGPU when not doing any GPU intensive tasks such as gaming, deep learning, rendering etc.
