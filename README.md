@@ -25,16 +25,16 @@ Make sure you have updated the system fully.
 
 
 ### Download
-* `git clone https://github.com/tur1ngb0x/linux-powersaving.git`
+* `git clone https://github.com/tur1ngb0x/powertop-autostart.git`
 
 ### Configure (Optional)
-* `cd linux-powersaving`
+* `cd powertop-autostart`
 * Open **pwrtp.sh** with any text editor.
 * In the "enable-powersavings" section of the script, add your device path as mentioned in the example template.
 * Save the file.
 
 ### Install
-* `cd linux-powersaving`
+* `cd powertop-autostart`
 * `chmod +x install.sh`
 * `sudo ./install.sh`
 
@@ -48,7 +48,7 @@ Make sure you have updated the system fully.
 
 ### Uninstall
 Automatically
-* `cd linux-powersaving`
+* `cd powertop-autostart`
 * `chmod +x uninstall.sh`
 * `sudo ./uninstall.sh`
 
