@@ -30,7 +30,7 @@ Make sure you have updated the system fully.
 ### Configure (Optional)
 * `cd powertop-autostart`
 * Open **pwrtp.sh** with any text editor.
-* In the "enable-powersavings" section of the script, add your device path as mentioned in the example template.
+* In the "**block-devices**" section of the script, add your device path as mentioned in the example template.
 * Save the file.
 
 ### Install
@@ -60,7 +60,10 @@ Manually
 * `sudo systemctl daemon-reload`
 
 ### Notes
-Optimus Laptop Users (Intel iGPU + Nvidia dGPU)
-* Open source Nvidia drivers (nouveau) do not support power management resulting in increased battery usage and higher idle temperatures.
-* Install latest (stable and tested) Nvidia proprietary drivers (nvidia) from your distro repos, these drivers support power management.
-* Switch to Intel iGPU when not doing any GPU intensive tasks such as gaming, deep learning, rendering etc.
+* Do not use TLP and `powertop --auto-tune` simultaneously as it will conflict the power settings. You can use any one of the following combination for power management.
+    * TLP + Powertop just for checking power consumption and CPU stats.
+    * Powertop using `powertop --auto-tune`
+* Optimus Laptop Users (Intel iGPU + Nvidia dGPU)
+	* Open source Nvidia drivers (nouveau) do not support power management resulting in increased battery usage and higher idle temperatures.
+	* Install latest (stable and tested) Nvidia proprietary drivers (nvidia) from your distro repos, these drivers support power management.
+	* Switch to Intel iGPU when not doing any GPU intensive tasks such as gaming, deep learning, rendering etc.
