@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-echo "Powertop script and service installer"
+printf "\nPowertop script and service installer\n"
 read -p " > Type 'yes' to proceed: "
 if [ "$REPLY" != "yes" ]; then
    exit
