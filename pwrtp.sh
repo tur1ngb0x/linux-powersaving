@@ -16,6 +16,7 @@ allow-devices ()
 	# Device Name
 	# sudo bash -c 'echo "on" > path'
 	echo "Applying 'Good' setting to selected devices..."
+	sudo bash -c 'echo "auto" > /sys/bus/pci/devices/0000:01:00.0/power/control'
 }
 
 block-devices ()
