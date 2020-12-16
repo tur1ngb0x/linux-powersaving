@@ -34,7 +34,8 @@ block-devices(){
 	sudo bash -c 'echo "on" > /sys/bus/usb/devices/1-5/power/control'
 	sudo bash -c 'echo "on" > /sys/bus/usb/devices/1-6/power/control'
 	# sudo bash -c 'echo "on" > /sys/bus/usb/devices/1-7/power/control' # Webcam
-	sudo bash -c 'echo "on" > /sys/bus/pci/devices/0000:03:00.0/power/control'
+	sudo bash -c 'echo "on" > /sys/bus/pci/devices/0000:03:00.0/power/control' # WiFi
+    sudo bash -c 'echo "on" > /sys/bus/pci/devices/0000:02:00.1/power/control' # Ethernet
 }
 
 
