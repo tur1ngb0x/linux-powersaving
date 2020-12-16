@@ -2,7 +2,7 @@
 # /etc/systemd/system/pwrtp.service
 
 [Unit]
-Description=Powertop custom startup script
+Description=Powertop Autostart Script
 
 [Service]
 Type=idle
@@ -11,3 +11,4 @@ ExecStart=/usr/bin/pwrtp.sh
 
 [Install]
 WantedBy=multi-user.target
+
