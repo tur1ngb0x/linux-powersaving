@@ -22,6 +22,7 @@ Make sure you have updated the system fully.
     * Wi-Fi Adapter
     * Ethernet
 * Toggle "Bad" state for respective device(s) and copy the command(s) printed on the top.
+* NOTE: All USB devices are blacklisted by default, if they arent, you might need to follow above steps.
 
 
 ### Download
