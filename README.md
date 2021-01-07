@@ -15,6 +15,7 @@ Make sure you have updated the system fully.
     * **Good** = Power saving is enabled.
     * **Bad** = Power saving is disabled.
 * We will need path of the device in order to blacklist it.
+* **NOTE**: All USB devices are blacklisted by default, if they arent, you might need to below steps.
 * Make a list of devices for which you want to disable power savings, such as:
 	* External HDD/SSD
     * Wireless/Wired Mouse
@@ -22,7 +23,7 @@ Make sure you have updated the system fully.
     * Wi-Fi Adapter
     * Ethernet
 * Toggle "Bad" state for respective device(s) and copy the command(s) printed on the top.
-* NOTE: All USB devices are blacklisted by default, if they arent, you might need to follow above steps.
+
 
 
 ### Download
