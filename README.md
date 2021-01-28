@@ -69,4 +69,4 @@ Manually
 	* Open source Nvidia drivers (nouveau) do not support power management resulting in increased battery usage and higher idle temperatures. It also may cause screen tearing in some setups.
 	* Install latest (stable and tested) Nvidia proprietary drivers (nvidia) from your distro repos, these drivers support power management.
 	* Switch to Intel iGPU when not doing any GPU intensive tasks such as gaming, deep learning, rendering etc.
-    * If you do not use or need Nvidia GPU on Linux, pass "modprobe.blacklist=nouveau modprobe.blacklist=nvidia" as kernel parameters. This will disable these modules from loading at every system boot.
+    * If you do not use or need Nvidia GPU on Linux, pass "`modprobe.blacklist=nouveau modprobe.blacklist=nvidia`" as kernel parameters. This will disable these modules from loading at every system boot.
