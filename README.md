@@ -24,8 +24,6 @@ Make sure you have updated the system fully.
     * Ethernet
 * Toggle "Bad" state for respective device(s) and copy the command(s) printed on the top.
 
-
-
 ### Download
 * `git clone https://github.com/tur1ngb0x/powertop-autostart.git`
 
@@ -65,8 +63,18 @@ Manually
 * Do not use TLP and `powertop --auto-tune` simultaneously as it will conflict the power settings. You can use any one of the following combination for power management.
     * TLP + Powertop just for checking power consumption and CPU stats.
     * Powertop using `powertop --auto-tune`
-* Optimus Laptop Users (Intel iGPU + Nvidia dGPU)
+* Optimus Laptop Users (Integrated GPU + Nvidia dGPU)
 	* Open source Nvidia drivers (nouveau) do not support power management resulting in increased battery usage and higher idle temperatures. It also may cause screen tearing in some setups.
 	* Install latest (stable and tested) Nvidia proprietary drivers (nvidia) from your distro repos, these drivers support power management.
-	* Switch to Intel iGPU when not doing any GPU intensive tasks such as gaming, deep learning, rendering etc.
+	* Switch to Integrated when not doing any GPU intensive tasks such as gaming, deep learning, rendering etc.
     * If you do not use or need Nvidia GPU on Linux, pass "`modprobe.blacklist=nouveau modprobe.blacklist=nvidia`" as kernel parameters. This will disable these modules from loading at every system boot.
+    * Alternatively you can use `system76-power` package to switch between Integrated and Nvidia GPU.
+        * `git clone https://github.com/pop-os/system76-power`
+        * `cd system76-power`
+        * `sudo make install`
+        * `sudo systemctl enable --now system76-power.service`
+    * To switch graphics:
+        * `system76-power graphics integrated`
+        * `system76-power graphics nvidia`
+    * Reboot the machine to apply changes.
+    
