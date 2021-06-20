@@ -1,16 +1,21 @@
 
-# Powertop configuration for Linux
+# powertop-autostart
 
-Powertop binary script and startup service for extending battery life on laptops running Linux.
+Powertop bash script and systemd startup service for extending battery life on laptops running Linux.
 
 ### Requirements
-Make sure you have updated the system fully.
-* Debian: `sudo apt install git powertop`
-* Fedora: `sudo dnf install git powertop`
-* Arch: `sudo pacman -S git powertop`
+* APT (Debian/Ubuntu/Mint/Pop!_OS)
+    * `sudo apt update`
+    * `sudo apt install git powertop`
+* DNF (RHEL/CentOS/Fedora)
+    * `sudo dnf upgrade`
+    * `sudo dnf install git powertop`
+* PACMAN (Arch/Manjaro)
+    * `sudo pacman -Syu`
+    * `sudo pacman -S git powertop`
 
 ### Power Analysis (Optional)
-* Open terminal and type `sudo powertop`.
+* Open a terminal and type `sudo powertop`.
 * Navigate to **Tunables** tab.
     * **Good** = Power saving is enabled.
     * **Bad** = Power saving is disabled.
@@ -29,7 +34,7 @@ Make sure you have updated the system fully.
 
 ### Configure (Optional)
 * `cd powertop-autostart`
-* Open **pwrtp.sh** with any text editor.
+* Open `pwrtp.sh` with any text editor.
 * In the "**block-devices**" section of the script, add your device path as mentioned in the example template.
 * Save the file.
 
@@ -67,14 +72,15 @@ Manually
 	* Open source Nvidia drivers (nouveau) do not support power management resulting in increased battery usage and higher idle temperatures. It also may cause screen tearing in some setups.
 	* Install latest (stable and tested) Nvidia proprietary drivers (nvidia) from your distro repos, these drivers support power management.
 	* Switch to Integrated when not doing any GPU intensive tasks such as gaming, deep learning, rendering etc.
-    * If you do not use or need Nvidia GPU on Linux, pass "`modprobe.blacklist=nouveau modprobe.blacklist=nvidia`" as kernel parameters. This will disable these modules from loading at every system boot.
+    * If you do not use or need Nvidia GPU on Linux, pass "`modprobe.blacklist=nouveau modprobe.blacklist=nvidia`" as kernel parameters. This will disable these modules from loading at every system boot. Regenerate the `initramfs` for changes to take effect and reboot.
     * Alternatively you can use `system76-power` package to switch between Integrated and Nvidia GPU.
         * `git clone https://github.com/pop-os/system76-power`
         * `cd system76-power`
         * `sudo make install`
+        * `sudo usermod -a -G adm $USER`
         * `sudo systemctl enable --now system76-power.service`
     * To switch graphics:
-        * `system76-power graphics integrated`
-        * `system76-power graphics nvidia`
+        * `sudo system76-power graphics integrated`
+        * `sudo system76-power graphics hybrid`
+        * `sudo system76-power graphics nvidia`
     * Reboot the machine to apply changes.
-    
