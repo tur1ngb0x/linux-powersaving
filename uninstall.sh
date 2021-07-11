@@ -5,7 +5,7 @@ text() {
 }
 
 if [[ $EUID -ne 0 ]]; then
-   echo "Error: Run this script as root, exiting." && exit 1 
+   echo "Error: Run this script as root, exiting." && exit 1
 fi
 
 text "POWERTOP AUTOSTART UNINSTALLER"
