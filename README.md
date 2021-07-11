@@ -42,6 +42,7 @@ Powertop bash script and systemd startup service for extending battery life on l
 * `cd powertop-autostart`
 * `chmod +x ./install.sh`
 * `./install.sh`
+    ![Install](./screenshots/0-install.png)
 
 ### Verify
 * Restart your machine.
@@ -55,6 +56,7 @@ Powertop bash script and systemd startup service for extending battery life on l
 * `cd powertop-autostart`
 * `chmod +x ./uninstall.sh`
 * `./uninstall.sh`
+    ![Unistall](./screenshots/1-uninstall.png)
 
 ### Notes
 * Do not use `tlp` and `powertop --auto-tune` simultaneously as it will conflict the power settings. You can use any one of the following combination for power management.
