@@ -1,8 +1,9 @@
-# Powertop systemd service
-# /etc/systemd/system/pwrtp.service
-
 [Unit]
-Description=Powertop Autostart Script
+Description=Powertop Autostart Service
+Documentation="https://github.com/tur1ngb0x/powertop-autostart"
+ConditionPathExists=/usr/bin/pwrtp.sh
+ConditionFileNotEmpty=/usr/bin/pwrtp.sh
+ConditionFileIsExecutable=/usr/bin/pwrtp.sh
 
 [Service]
 Type=idle
