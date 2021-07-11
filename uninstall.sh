@@ -1,26 +1,30 @@
 #!/usr/bin/env bash
 
-text () { printf "\n\n\n$1\n" ; }
+text() {
+   printf "\n$1\n"
+}
 
-text "POWERTOP AUTOSTART UNINSTALLER"
-read -p " > Type 'yes' to proceed: "
-if [ "$REPLY" != "yes" ]; then
-   exit
+if [[ $EUID -ne 0 ]]; then
+   echo "Error: Run this script as root, exiting." && exit 1 
 fi
 
-text "Stopping powertop service..."
-systemctl stop pwrtp.service
+text "POWERTOP AUTOSTART UNINSTALLER"
+read -r -p " > Type 'yes' to proceed: "
+if [ "$REPLY" != "yes" ]; then
+   echo "Error: Incorrect input, exiting." && exit 1
+fi
 
-text "Disabling powertop service..."
+text "DISABLING SERVICE"
+systemctl stop pwrtp.service
 systemctl disable pwrtp.service
 
-text "Removing powertop service..."
-rm -v /etc/systemd/system/pwrtp.service
+text "UNINSTALLING SERVICE"
+rm -fv /etc/systemd/system/pwrtp.service
 
-text "Removing powertop script..."
-rm -v /usr/bin/pwrtp.sh
+text "UNINSTALLING SCRIPT"
+rm -fv /usr/bin/pwrtp.sh
 
-text "Reloading systemd daemon..."
+text "RELOADING DAEMON"
 systemctl daemon-reload
 
-text "Done"
+text "SUCCESSFULLY UNINSTALLED"
