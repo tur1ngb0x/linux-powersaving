@@ -1,27 +1,47 @@
 #!/usr/bin/env bash
 
-text () { printf "\n\n\n$1\n" ; }
+text() {
+   printf "\n$1\n"
+}
 
-text "POWERTOP AUTOSTART INSTALLER"
-read -p " > Type 'yes' to proceed: "
-if [ "$REPLY" != "yes" ]; then
-   exit
+if [[ $EUID -ne 0 ]]; then
+   echo "Error: Run this script as root, exiting." && exit 1 
 fi
 
-text "Installing powertop script..."
-cp -iv ./pwrtp.sh /usr/bin/
-chmod +x /usr/bin/pwrtp.sh
+text "POWERTOP AUTOSTART INSTALLER"
+read -r -p " > Type 'yes' to proceed: "
+if [ "$REPLY" != "yes" ]; then
+   echo "Error: Incorrect input, exiting." && exit 1
+fi
 
-text "Installing powertop service..."
-cp -iv ./pwrtp.service /etc/systemd/system/
+install_script() {
+   text "INSTALLING SCRIPT"
+   if [[ -f /usr/bin/pwrtp.sh ]]; then
+      rm -fv /usr/bin/pwrtp.sh   
+   fi
+   cp -iv ./pwrtp.sh /usr/bin/pwrtp.sh
+   chmod +x /usr/bin/pwrtp.sh
+}
 
-text "Enabling powertop service..."
-systemctl enable pwrtp.service
+install_service() {
+   text "INSTALLING SERVICE"
+   if [[ -f /etc/systemd/system/pwrtp.service ]]; then
+      rm -fv /etc/systemd/system/pwrtp.service
+   fi
+   cp -iv ./pwrtp.service /etc/systemd/system/pwrtp.service
+}
 
-text "Starting powertop service..."
-systemctl start pwrtp.service
+enable_service() {
+   text "ENABLING SERVICE"
+   systemctl enable --now pwrtp.service
 
-text "Reloading systemd daemon..."
-systemctl daemon-reload
+   text "RELOADING DAEMON"
+   systemctl daemon-reload
+}
 
-text "Done"
+finished() {
+   text "SUCCESSFULLY INSTALLED"
+}
+
+# Begin script from here
+(install_script && install_service && enable_service && finished) || (echo "FAILED TO INSTALL" && exit)
