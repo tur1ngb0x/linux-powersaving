@@ -5,7 +5,7 @@ text() {
 }
 
 if [[ $EUID -ne 0 ]]; then
-   echo "Error: Run this script as root, exiting." && exit 1 
+   echo "Error: Run this script as root, exiting." && exit 1
 fi
 
 text "POWERTOP AUTOSTART INSTALLER"
@@ -17,7 +17,7 @@ fi
 install_script() {
    text "INSTALLING SCRIPT"
    if [[ -f /usr/bin/pwrtp.sh ]]; then
-      rm -fv /usr/bin/pwrtp.sh   
+      rm -fv /usr/bin/pwrtp.sh
    fi
    cp -iv ./pwrtp.sh /usr/bin/pwrtp.sh
    chmod +x /usr/bin/pwrtp.sh
@@ -44,4 +44,4 @@ finished() {
 }
 
 # Begin script from here
-(install_script && install_service && enable_service && finished) || (echo "FAILED TO INSTALL" && exit)
+(install_script && install_service && enable_service && finished) || (echo "FAILED TO INSTALL" && exit 1)
