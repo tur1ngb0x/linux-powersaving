@@ -38,10 +38,10 @@ Powertop bash script and systemd startup service for extending battery life on l
 * In the "**block-devices**" section of the script, add your device path as mentioned in the example template.
 * Save the file.
 
-### Install
+### Install (as root)
 * `cd powertop-autostart`
-* `chmod +x install.sh`
-* `sudo ./install.sh`
+* `chmod +x ./install.sh`
+* `./install.sh`
 
 ### Verify
 * Restart your machine.
@@ -51,36 +51,29 @@ Powertop bash script and systemd startup service for extending battery life on l
     * **Bad** for devices for which you have disabled power savings.
     * **Good** for rest of the devices.
 
-### Uninstall
-Automatically
+### Uninstall (as root)
 * `cd powertop-autostart`
-* `chmod +x uninstall.sh`
-* `sudo ./uninstall.sh`
-
-Manually
-* `sudo systemctl stop pwrtp.service`
-* `sudo systemctl disable pwrtp.service`
-* `sudo rm /etc/systemd/system/pwrtp.service`
-* `sudo rm /usr/bin/pwrtp.sh`
-* `sudo systemctl daemon-reload`
+* `chmod +x ./uninstall.sh`
+* `./uninstall.sh`
 
 ### Notes
-* Do not use TLP and `powertop --auto-tune` simultaneously as it will conflict the power settings. You can use any one of the following combination for power management.
-    * TLP + Powertop just for checking power consumption and CPU stats.
-    * Powertop using `powertop --auto-tune`
-* Optimus Laptop Users (Integrated GPU + Nvidia dGPU)
-	* Open source Nvidia drivers (nouveau) do not support power management resulting in increased battery usage and higher idle temperatures. It also may cause screen tearing in some setups.
-	* Install latest (stable and tested) Nvidia proprietary drivers (nvidia) from your distro repos, these drivers support power management.
-	* Switch to Integrated when not doing any GPU intensive tasks such as gaming, deep learning, rendering etc.
-    * If you do not use or need Nvidia GPU on Linux, pass "`modprobe.blacklist=nouveau modprobe.blacklist=nvidia`" as kernel parameters. This will disable these modules from loading at every system boot. Regenerate the `initramfs` for changes to take effect and reboot.
-    * Alternatively you can use `system76-power` package to switch between Integrated and Nvidia GPU.
-        * `git clone https://github.com/pop-os/system76-power`
-        * `cd system76-power`
-        * `sudo make install`
-        * `sudo usermod -a -G adm $USER`
-        * `sudo systemctl enable --now system76-power.service`
-    * To switch graphics:
-        * `sudo system76-power graphics integrated`
-        * `sudo system76-power graphics hybrid`
-        * `sudo system76-power graphics nvidia`
-    * Reboot the machine to apply changes.
+* Do not use `tlp` and `powertop --auto-tune` simultaneously as it will conflict the power settings. You can use any one of the following combination for power management.
+    * `tlp` for power-saving + `powertop` for just for checking power consumption and CPU stats.
+    * This script for everything.
+* Hybrid Graphics Laptop Users : Integrated (Intel/AMD) GPU + Nvidia Dedicated GPU
+	* Open source Nvidia drivers `nouveau` do not support power management resulting in increased battery usage and higher idle temperatures. It also may cause screen tearing on some machines.
+	* Proprietary Nvidia drivers `nvidia` are recommended for installation from your distro repos, these drivers support power management and have better performance.
+    * Switch to Integrated GPU when not doing any dedicated GPU intensive tasks such as gaming, deep learning, rendering etc.
+    * If you do not use Nvidia GPU on Linux:
+        * Method 1 (Recommended) : Some laptops have an option to switch off Nvidia GPU from the laptop's BIOS/UEFI settings. This turns off power to Nvidia GPU completely.
+        * Method 2 : Using `system76-power` package. This blacklists `nouveau` and `nvidia` module and turns off the Nvidia GPU completely.
+            * My Auto Install Script : https://github.com/tur1ngb0x/stuff/blob/main/linux/scripts/system76-power.sh
+            * Github : https://github.com/pop-os/system76-power
+            * PPA : https://launchpad.net/~system76-dev/+archive/ubuntu/stable
+            * COPR : https://copr.fedorainfracloud.org/coprs/szydell/system76/
+            * AUR : https://aur.archlinux.org/packages/system76-power            
+        * Method 3 (If all of the above methods fail) : Pass these parameters to the kernel
+            ```
+            modprobe.blacklist=nouveau modprobe.blacklist=nvidia
+            ```
+            Regenerate your `grub2` / `systemd-boot` / `refind` configuration file including `initramfs` and immediately reboot for changes to take effect. This blacklists `nouveau` and `nvidia` modules, but does not turn off the Nvidia GPU.
